@@ -1,0 +1,61 @@
+name: Paid model evaluations
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        description: Type RUN_PAID_EVALUATIONS to authorize bounded provider usage
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: paid-model-evaluations
+  cancel-in-progress: false
+
+jobs:
+  bounded-openai:
+    if: inputs.confirmation == 'RUN_PAID_EVALUATIONS'
+    runs-on: ubuntu-24.04
+    environment: paid-evaluation
+    timeout-minutes: 20
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: telecom_test_db
+          POSTGRES_USER: telecom_test
+          POSTGRES_PASSWORD: ci-only-postgres-password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U telecom_test -d telecom_test_db"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      APP_ENV: testing
+      DATABASE_URL: postgresql+psycopg://telecom_test:ci-only-postgres-password@127.0.0.1:5432/telecom_test_db
+      TEST_DATABASE_URL: postgresql+psycopg://telecom_test:ci-only-postgres-password@127.0.0.1:5432/telecom_test_db
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      DEEP_AGENT_MODEL: openai:gpt-4.1-mini
+      RUN_PHASE10_MODEL_TEST: "yes"
+      RUN_REAL_RAGAS: "yes"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@68559e99cc807c1eb7e9238fd43a15bba460eec2 # v10.3.3
+        with:
+          version: "0.13.6"
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - run: uv python install 3.13
+      - run: uv sync --frozen --extra evaluation
+      - name: Require configured provider secret
+        run: test -n "$OPENAI_API_KEY"
+      - run: uv run alembic upgrade head
+      - name: Run bounded Deep Agent acceptance
+        run: uv run pytest backend/tests/test_deep_investigation_openai.py -q
+      - name: Run bounded genuine RAGAS evaluation
+        run: uv run python -m backend.scripts.run_ragas_evaluation

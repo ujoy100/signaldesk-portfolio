@@ -1,0 +1,15 @@
+node_modules
+dist
+.env
+.env.*
+!.env.example
+test-results
+playwright-report
+.vite
+coverage
+*.log
+*.pem
+*.key
+*.p12
+*.pfx
+.DS_Store

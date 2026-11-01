@@ -1,0 +1,122 @@
+[
+  {
+    "metadata": {
+      "document_id": "faq-sim-puk-001",
+      "source": "fictional://telecom/faqs/sim-puk",
+      "service": "mobile",
+      "category": "sim_support",
+      "version": "1.0",
+      "active": true,
+      "access_roles": ["public", "support_agent"],
+      "page": 1,
+      "section": "PUK recovery",
+      "title": "Recovering a locked fictional SIM"
+    },
+    "content": "If a fictional SIM is locked after three incorrect PIN attempts, do not keep guessing. Find the eight-digit PUK in the customer portal under Mobile, SIM security. Entering an incorrect PUK ten times permanently blocks the fictional SIM. Policy code SIM-PUK-08 requires identity verification before a support agent discloses a PUK. If portal access is unavailable, contact support for verified recovery or SIM replacement."
+  },
+  {
+    "metadata": {
+      "document_id": "guide-sim-activation-001",
+      "source": "fictional://telecom/guides/sim-activation",
+      "service": "mobile",
+      "category": "activation",
+      "version": "1.1",
+      "active": true,
+      "access_roles": ["public", "support_agent"],
+      "page": 2,
+      "section": "Activation steps",
+      "title": "Fictional SIM activation guide"
+    },
+    "content": "To activate a fictional physical SIM, sign in, choose Mobile, select Activate SIM, and enter the 19-digit ICCID printed on the card. Restart the phone after the portal confirms activation. Activation normally finishes within fifteen minutes. For an eSIM, scan the one-time QR code only on the intended device. Policy code ACT-SIM-19 requires a support ticket if activation remains pending for more than two hours."
+  },
+  {
+    "metadata": {
+      "document_id": "policy-roaming-001",
+      "source": "fictional://telecom/policies/roaming",
+      "service": "mobile",
+      "category": "roaming_policy",
+      "version": "2.0",
+      "active": true,
+      "access_roles": ["public", "support_agent"],
+      "page": 4,
+      "section": "Travel passes and fair use",
+      "title": "Fictional international roaming policy"
+    },
+    "content": "International roaming is disabled by default on fictional prepaid lines. Customers can enable a travel pass before departure in the portal. Policy code ROAM-PASS-24 provides 5 GB for seven days in listed Zone A countries. After 5 GB, data pauses instead of generating an automatic overage. Calls to satellite networks and maritime networks are excluded. The device must have data roaming enabled after the pass becomes active."
+  },
+  {
+    "metadata": {
+      "document_id": "policy-billing-001",
+      "source": "fictional://telecom/policies/billing",
+      "service": "billing",
+      "category": "billing_policy",
+      "version": "3.2",
+      "active": true,
+      "access_roles": ["public", "support_agent"],
+      "page": 3,
+      "section": "Invoice disputes",
+      "title": "Fictional billing and dispute policy"
+    },
+    "content": "A fictional invoice dispute must be opened within thirty calendar days of the invoice date. Policy code BILL-DISPUTE-30 requires the invoice number and the specific charge being disputed. Opening a dispute does not suspend undisputed recurring charges. Support agents may explain charges, but credits above the configured threshold require human approval. Customers receive a written outcome in the portal when review is complete."
+  },
+  {
+    "metadata": {
+      "document_id": "guide-network-001",
+      "source": "fictional://telecom/guides/network-troubleshooting",
+      "service": "mobile",
+      "category": "network_troubleshooting",
+      "version": "1.4",
+      "active": true,
+      "access_roles": ["public", "support_agent"],
+      "page": 5,
+      "section": "No mobile data",
+      "title": "Fictional mobile network troubleshooting"
+    },
+    "content": "For no mobile data, first confirm airplane mode is off and mobile data is on. Check that the fictional line is active and has remaining allowance. Restart the device, then select the network automatically. The fictional APN is data.example.test with username and password left blank. Do not reset all device settings until these checks are complete. Escalate with code NET-DATA-05 when multiple devices in the same area have no service for more than thirty minutes."
+  },
+  {
+    "metadata": {
+      "document_id": "runbook-credit-001",
+      "source": "fictional://telecom/internal/credit-approval",
+      "service": "billing",
+      "category": "internal_runbook",
+      "version": "1.0",
+      "active": true,
+      "access_roles": ["support_agent", "supervisor"],
+      "page": 1,
+      "section": "Approval routing",
+      "title": "Internal fictional credit approval runbook"
+    },
+    "content": "Internal procedure CREDIT-HITL-50: a proposed fictional account credit above 50 currency units must be paused and routed to a supervisor for human approval. The agent records the reason, affected invoice, proposed value, and supporting evidence. No credit is executed while approval status is pending, rejected, or expired."
+  },
+  {
+    "metadata": {
+      "document_id": "policy-roaming-legacy-001",
+      "source": "fictional://telecom/policies/roaming-legacy",
+      "service": "mobile",
+      "category": "roaming_policy",
+      "version": "1.0",
+      "active": false,
+      "access_roles": ["public", "support_agent"],
+      "page": 2,
+      "section": "Superseded allowance",
+      "title": "Superseded fictional roaming policy"
+    },
+    "content": "Obsolete policy ROAM-PASS-OLD previously allowed 1 GB for three days and charged automatic overages. This version is inactive and must not be used for current customer guidance."
+  },
+  {
+    "metadata": {
+      "document_id": "faq-travel-device-001",
+      "source": "fictional://telecom/faqs/travel-device",
+      "service": "devices",
+      "category": "device_advice",
+      "version": "1.0",
+      "active": true,
+      "access_roles": ["public", "support_agent"],
+      "page": 1,
+      "section": "Travel preparation",
+      "title": "Fictional device travel checklist"
+    },
+    "content": "Before travel, charge the device, store support contact details, and pack a compatible adapter. This general checklist does not define roaming allowances, roaming prices, policy codes, or travel pass entitlement."
+  }
+]

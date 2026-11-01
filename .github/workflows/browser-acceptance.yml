@@ -1,0 +1,60 @@
+name: Browser acceptance
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: browser-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  COMPOSE_PROJECT_NAME: signaldesk-browser-ci
+  COMPOSE_FILE: compose.yaml:compose.acceptance.yaml
+
+jobs:
+  playwright-compose:
+    name: Playwright with real Compose stack
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Create ephemeral CI-only Compose secrets
+        run: |
+          mkdir -p secrets
+          printf '%s' 'ci-only-compose-password' > secrets/postgres_password.txt
+          printf '%s' 'ci-only-compose-jwt-secret-with-sufficient-entropy' > secrets/auth_jwt_secret.txt
+          chmod 600 secrets/*.txt
+      - name: Start isolated stack
+        run: docker compose up -d --build --wait
+      - name: Seed fictional acceptance data
+        run: docker compose --profile tools run --rm seed
+      - name: Install locked frontend dependencies
+        working-directory: frontend
+        run: npm ci
+      - name: Confirm hosted Chrome availability
+        run: google-chrome --version
+      - name: Run real browser acceptance
+        working-directory: frontend
+        env:
+          PLAYWRIGHT_BASE_URL: http://localhost:5173
+          PLAYWRIGHT_BROWSER_CHANNEL: chrome
+        run: npm run test:e2e
+      - name: Record service state
+        if: always()
+        run: docker compose ps
+      - name: Stop stack without deleting volumes
+        if: always()
+        run: docker compose down

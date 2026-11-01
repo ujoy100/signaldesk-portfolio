@@ -1,0 +1,10 @@
+services:
+  backend:
+    environment:
+      ENTRA_CLIENT_SECRET_FILE: /run/secrets/entra_client_secret
+    secrets:
+      - entra_client_secret
+
+secrets:
+  entra_client_secret:
+    file: ./secrets/entra_client_secret.txt

@@ -1,0 +1,15 @@
+services:
+  postgres:
+    environment:
+      POSTGRES_DB: telecom_test_db
+  migrate:
+    environment: &test_environment
+      DATABASE_URL: postgresql+psycopg://telecom@postgres:5432/telecom_test_db
+      OPENAI_API_KEY: ""
+      DEEP_AGENT_MODEL: ""
+  checkpoints:
+    environment: *test_environment
+  backend:
+    environment: *test_environment
+  seed:
+    environment: *test_environment

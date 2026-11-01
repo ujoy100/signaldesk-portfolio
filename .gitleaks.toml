@@ -1,0 +1,5 @@
+[extend]
+useDefault = true
+
+# No global allowlists. Any future fixture exception must be limited to an
+# exact value, rule and path after inspecting the redacted finding.

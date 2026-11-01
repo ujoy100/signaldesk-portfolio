@@ -1,0 +1,63 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables / secrets
+.env
+secrets/*.txt
+.env.*
+!.env.example
+
+# Python tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# React / Node
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.vite/
+frontend/test-results/
+frontend/playwright-report/
+
+# IDE
+.vscode/
+.idea/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+tmp/
+temp/
+
+# Docker local overrides
+docker-compose.override.yml
+
+# Secrets / certificates
+*.pem
+*.key
+*.crt
+
+# Independent local portfolio snapshot (separate Git history)
+/portfolio-export/

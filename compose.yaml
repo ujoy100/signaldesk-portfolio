@@ -1,0 +1,109 @@
+name: telecom-agentic-ai-support
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: telecom_db
+      POSTGRES_USER: telecom
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets: [postgres_password]
+    volumes: [telecom_postgres_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U telecom -d telecom_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.5
+    volumes: [telecom_qdrant_data:/qdrant/storage]
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c '</dev/tcp/127.0.0.1/6333'"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  migrate:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+      target: runtime
+    command: ["alembic", "upgrade", "head"]
+    environment: &backend_environment
+      APP_ENV: development
+      DATABASE_URL: postgresql+psycopg://telecom@postgres:5432/telecom_db
+      DATABASE_PASSWORD_FILE: /run/secrets/postgres_password
+      QDRANT_URL: http://qdrant:6333
+      CORS_ORIGINS: '["http://localhost:5173"]'
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      DEEP_AGENT_MODEL: ${DEEP_AGENT_MODEL:-}
+      ENTRA_TENANT_ID: ${ENTRA_TENANT_ID:-}
+      ENTRA_CLIENT_ID: ${ENTRA_CLIENT_ID:-}
+      ENTRA_REDIRECT_URI: http://localhost:8000/auth/callback
+      FRONTEND_URL: http://localhost:5173
+      COOKIE_SECURE: "false"
+    secrets: [auth_jwt_secret, postgres_password]
+    depends_on:
+      postgres: { condition: service_healthy }
+    restart: "no"
+
+  checkpoints:
+    build: { context: ., dockerfile: backend/Dockerfile, target: runtime }
+    command: ["python", "-m", "backend.scripts.setup_checkpoints"]
+    environment: *backend_environment
+    secrets: [auth_jwt_secret, postgres_password]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    restart: "no"
+
+  backend:
+    build: { context: ., dockerfile: backend/Dockerfile, target: runtime }
+    environment: *backend_environment
+    secrets: [auth_jwt_secret, postgres_password]
+    ports: ["127.0.0.1:8000:8000"]
+    depends_on:
+      checkpoints: { condition: service_completed_successfully }
+      qdrant: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/ready', timeout=3)"]
+      interval: 10s
+      timeout: 4s
+      retries: 12
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: frontend
+      args: { VITE_API_BASE_URL: "http://localhost:8000", VITE_ENABLE_DEV_LOGIN: "true" }
+    ports: ["127.0.0.1:5173:80"]
+    depends_on:
+      backend: { condition: service_healthy }
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  seed:
+    profiles: ["tools"]
+    build: { context: ., dockerfile: backend/Dockerfile, target: runtime }
+    command: ["/bin/sh", "-c", "python -m backend.app.db.seed && python -m backend.app.knowledge.ingestion"]
+    environment: *backend_environment
+    secrets: [auth_jwt_secret, postgres_password]
+    depends_on:
+      migrate: { condition: service_completed_successfully }
+    restart: "no"
+
+volumes:
+  telecom_postgres_data:
+  telecom_qdrant_data:
+
+secrets:
+  postgres_password:
+    file: ./secrets/postgres_password.txt
+  auth_jwt_secret:
+    file: ./secrets/auth_jwt_secret.txt
