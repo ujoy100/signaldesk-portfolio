@@ -183,9 +183,10 @@ behavior, not cloud deployment or verified Microsoft sign-in.
   it does not clear these findings. See [SECURITY.md](SECURITY.md).
 - Optional frozen RAGAS dependencies have documented advisories and a deprecated
   LangChain community import. They remain isolated from production.
-- Branch protection for the private development repository is blocked by its
-  current plan; protection for a future public portfolio remote is not configured. Phase 17
-  stays IN PROGRESS; Vercel/Render/managed PostgreSQL/Qdrant Cloud deployment and
+- `main` is protected: pull requests are required, force pushes and deletion are
+  prohibited, and four passing checks are required: backend, frontend, browser
+  acceptance, and secret/dependency review. Phase 17 stays IN PROGRESS;
+  Vercel/Render/managed PostgreSQL/Qdrant Cloud deployment and
   final Phase 19 acceptance remain PENDING.
 - Historical artwork is verified Vite starter material with its upstream notice
   retained. Historical personal commit emails and Actions artifacts belong to the
