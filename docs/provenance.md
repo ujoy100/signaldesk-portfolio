@@ -1,12 +1,18 @@
 # Asset and data provenance
 
+> Scope: historical evidence from the private `telecom-agentic-ai-support`
+> development repository. References to original commits, personal email metadata,
+> retained Actions artifacts and removed artwork refer to that repository, not
+> this independent portfolio history. See [the source-review publication plan](portfolio-publication-plan.md)
+> for this snapshot’s publication boundary.
+
 Reviewed 1 November 2026. This inventory describes evidence available in the
 repository; it does not establish rights to material whose origin is unknown.
 
 | Material | Origin / status | Publication handling |
 |---|---|---|
 | SignalDesk mark/favicon, login grid and workspace decoration | Original HTML/CSS and code-authored SVG favicon authored for this repository; no external image/font dependency | Current UI replacement |
-| `frontend/src/assets/hero.png` (historical) | Present in initial commit `6533a2d`; byte-identical to the official Vite v8.3.0 React starter (SHA-256 verified) | Removed from current tree; still retrievable from Git history. upstream MIT notice retained in THIRD_PARTY_NOTICES.md; no artwork-driven rewrite is recommended on current evidence |
+| `frontend/src/assets/hero.png` (historical) | Present in initial commit `6533a2d`; byte-identical to the official Vite v8.3.0 React starter (SHA-256 verified) | Absent from this snapshot; retrievable only from the private development Git history. upstream MIT notice retained in THIRD_PARTY_NOTICES.md; no artwork-driven rewrite is recommended on current evidence |
 | `docs/screenshots/phase15-*.png` | Playwright captures of this application's fictional local workflows | Inspect visually before publication; no tokens, real identities or private infrastructure should appear |
 | `backend/data/knowledge/fictional_telecom.json` | Repository-authored fictional telecom guidance | Demonstration material, not carrier policy or customer advice |
 | `backend/app/db/seed.py` | Deterministic fictional customer/plan/subscription/ticket fixtures | No production exports; reserved example identities are intentional |
@@ -39,3 +45,10 @@ Unused `react.svg`, `vite.svg` and `public/icons.svg` are retained starter
 assets, not original SignalDesk artwork. Their upstream framework/brand rights
 remain applicable; no branding ownership claim is made. The rendered favicon
 is original signal-bar SVG matching the CSS identity.
+
+## Original project ownership
+
+The owner confirms SignalDesk is a personal learning and portfolio project,
+developed with OpenAI Codex assistance, not an employer or client project.
+This statement does not replace third-party notices or grant an open-source
+license. Original work remains without a broad reuse license.

@@ -16,3 +16,11 @@ and third-party notices remain applicable. Phase 17 IN PROGRESS; 18–19 PENDING
 EXPORT_MANIFEST.json hashes every payload file except itself and Git metadata.
 The manifest is an integrity inventory, not a security attestation. Publication
 requires owner review and explicit approval; no remote is configured locally.
+
+## Documentation correction follow-up
+
+The local follow-up scopes inherited audit/checklist/history references to the
+private development repository and permits owner-approved public source review
+while keeping production release blocked. The owner confirms personal project
+ownership and OpenAI Codex assistance. No open-source license is added. Synthetic
+commit attribution is retained to avoid exposing personal email metadata.

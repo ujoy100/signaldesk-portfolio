@@ -1,7 +1,23 @@
 # Publication security checklist
 
-Public release is **blocked** until the owner resolves the items below. This
-checklist does not authorize making the repository public or changing settings.
+This is the **full application/private development repository release checklist**.
+Its historical-email, retained-artifact and branch-plan items refer to that
+repository. The independent portfolio contains neither its history nor its Actions
+artifacts. This checklist does not authorize publication or settings changes.
+
+## Independent source-review portfolio
+
+- [x] Owner confirms personal learning/portfolio ownership and Codex assistance;
+  no employer or client project materials are claimed.
+- [x] Scope separates public source inspection from blocked production release.
+- [x] Retain third-party notices without adding an open-source license.
+- [x] Run fresh Gitleaks; 11 manifest-checksum false positives remain unsuppressed.
+- [ ] Resolve the strict secret gate’s checksum false positives through a
+  separately approved approach; see [preflight](publication-preflight.md).
+- [ ] Obtain owner approval of the final commit before remote creation/publication.
+
+The [publication plan](portfolio-publication-plan.md) governs this narrower route.
+The full-release requirements below remain open; production gates are unchanged.
 
 ## Owner decisions and manual steps
 

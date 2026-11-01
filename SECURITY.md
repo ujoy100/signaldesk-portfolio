@@ -30,7 +30,9 @@ See [the public-release audit](docs/public-release-audit.md) and
 The strict full-history scan uses no global fixture allowlist. CI avoids persisting
 checkout credentials and automatically uploading Docker build records or
 Playwright traces, which can contain authenticated requests. Retained historical
-artifacts and commit email metadata require an owner publication decision.
+artifacts and personal commit email metadata belong to the private development
+repository, not this independent snapshot. Its earlier full-release audit is
+historical evidence; the source-review route below governs this portfolio.
 Development integration/browser tests must use only isolated `telecom_test_db`;
 `compose.acceptance.yaml` supplies the browser-specific database override.
 
@@ -53,7 +55,11 @@ Examples independently checked against Debian's tracker:
 [util-linux](https://security-tracker.debian.org/tracker/CVE-2026-76642),
 [ncurses](https://security-tracker.debian.org/tracker/CVE-2025-69720), and
 [SQLite](https://security-tracker.debian.org/tracker/CVE-2026-119373).
-Do not make the repository public or claim a clean container audit until the
-remaining gate passes. Rebuild without cached OS-update layers after patched
+Do not deploy, release production containers or claim a clean container audit
+until the remaining gate passes. A reviewed source-only portfolio may be made
+public only after explicit owner approval under the
+[publication plan](docs/portfolio-publication-plan.md). This exception permits
+source inspection, not production clearance; all vulnerability gates stay strict.
+Rebuild without cached OS-update layers after patched
 packages become available, or implement and fully validate a reviewed compatible
 runtime reduction. Do not hide package metadata or suppress findings to pass CI.

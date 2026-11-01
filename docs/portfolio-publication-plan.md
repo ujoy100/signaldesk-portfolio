@@ -53,7 +53,8 @@ advisories remain documented and isolated. Source publication does not fix them.
 1. Review the local export diff/manifest, six screenshots and fictional fixtures.
    Prior visual review is recorded in the audit; approve the exact snapshot.
    Phone-like fixtures are fictional but not guaranteed reserved; never contact them.
-2. Confirm rights to publish original source and documentation, retaining
+2. Owner has confirmed this is a personal learning/portfolio project developed
+   with OpenAI Codex assistance, not an employer/client project. Retain
    THIRD_PARTY_NOTICES.md. No MIT/Apache license is proposed.
 3. Approve the source-review exception explicitly, including public disclosure of
    the unresolved security findings and retention of strict failing image checks.
@@ -80,8 +81,10 @@ coverage limits remain in the audit. No scanner proves absence of every secret.
 
 ## Blockers by purpose
 
-**Public source portfolio:** owner approval of exact contents, screenshot/privacy
-and rights review, approval of the source-review exception, and remote publication.
+**Public source portfolio:** fresh exact-snapshot Gitleaks verification and owner
+approval of the final contents/source-review release, followed by separately
+authorized remote creation/publication. Ownership is confirmed; screenshots were
+reviewed in the read-only preflight, with no visible private data.
 The clean snapshot does not inherit private commit email metadata or retained
 Actions artifacts. It must not be presented as a finished production release.
 

@@ -1,5 +1,11 @@
 # SignalDesk public-release audit — 1 November 2026
 
+> Scope: historical evidence from the private `telecom-agentic-ai-support`
+> development repository. References to original commits, personal email metadata,
+> retained Actions artifacts and removed artwork refer to that repository, not
+> this independent portfolio history. See [the source-review publication plan](portfolio-publication-plan.md)
+> for this snapshot’s publication boundary.
+
 Decision: suitable for a reviewed private Git commit after the recorded gates;
 **not cleared for public release**. Phase 17 remains IN PROGRESS; Phases 18/19
 remain PENDING. No visibility/security settings, secrets, development databases,

@@ -11,7 +11,8 @@ SHA-256: `881ffbcaafc212e49addad08846a5b82761355fa20624253af3477ba33262c5c`.
 Source: https://github.com/vitejs/vite/blob/434e8e9495436a60789f2b588a04a6a24a3d1661/packages/create-vite/template-react/src/assets/hero.png
 
 The following upstream notice is retained for Vite-derived starter material
-and the image still present in Git history:
+and the image retained only in the private development repository’s history
+(the image and original history are absent from this portfolio snapshot):
 
 ```text
 MIT License
