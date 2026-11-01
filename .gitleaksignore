@@ -1,0 +1,13 @@
+# Verified SHA-256 checksum false positives in EXPORT_MANIFEST.json.
+# Each entry identifies one historical finding; all other scanning remains active.
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:115
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:126
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:135
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:137
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:139
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:147
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:151
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:159
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:46
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:52
+3449ef1cb7f60c917a3673c9d50ab8d2708502cc:EXPORT_MANIFEST.json:generic-api-key:80
