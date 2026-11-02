@@ -1,6 +1,13 @@
 # Phase 17 — GitHub Actions CI/CD evaluation gate
 
-**Status: IN PROGRESS.** Workflow implementation, local validation, and the required clean GitHub-hosted jobs have passed. Phase 17 cannot be marked DONE until required branch protection is available and confirmed; the current private-repository GitHub plan does not provide it.
+**Status: IN PROGRESS.** Public-main commit `3124016` passes the application,
+evaluation, secret/dependency and browser checks; the strict backend container
+scan still fails. Public protection requires four checks, excluding the enabled
+image-security job. The original private repository still has the plan-related
+HTTP 403 protection blocker. See [current reconciliation](phase-17-reconciliation.md)
+for exact evidence and remaining acceptance gaps. Historical validation sections
+below retain their original dates and private-development scope; they do not
+establish closure for the public portfolio or original private repository.
 
 ## Workflow architecture
 
@@ -13,9 +20,9 @@
 - Gitleaks plus pull-request dependency review; and
 - reproducible backend/frontend multi-stage image builds and Compose-model validation.
 
-`browser-acceptance.yml` provisions ephemeral CI-only Compose secret files, starts the complete isolated stack, seeds only fictional data, and runs the existing five Playwright scenarios in hosted Google Chrome. It uploads diagnostics only on failure and stops services with `docker compose down`, never `down -v`.
+`browser-acceptance.yml` provisions ephemeral CI-only Compose secret files, starts the complete isolated stack, seeds only fictional data, and runs the existing five Playwright scenarios in hosted Google Chrome. The public workflow retains only six allowlisted fictional screenshots after successful acceptance for seven days; it does not upload authenticated traces, HAR or videos. It stops services with `docker compose down`, never `down -v`.
 
-`paid-evaluations.yml` is deliberately separate and manual. It requires the exact dispatch confirmation, the protected `paid-evaluation` GitHub environment, and `OPENAI_API_KEY` from GitHub Actions secrets. It bounds execution to the existing Phase 10 model scenario and two-case genuine RAGAS runner. No paid provider call occurs in ordinary CI.
+`paid-evaluations.yml` is deliberately separate and manual. It requires the exact dispatch confirmation and references `paid-evaluation` plus `OPENAI_API_KEY` from GitHub Actions secrets. The public environment is not configured: its required-reviewer protection must be established before any optional paid run; the workflow reference alone does not enforce that protection. It bounds execution to the existing Phase 10 model scenario and two-case genuine RAGAS runner. No paid provider call occurs in ordinary CI.
 
 Dependabot proposes weekly GitHub Actions, npm, and uv updates. Actions use controlled major release lines and explicit workflow permissions; Dependabot review is required before merging updates.
 
@@ -29,7 +36,7 @@ The browser token issuer is invoked only inside the ephemeral backend container.
 
 Before closure, the owner must review and selectively stage Phase 1–17 source, migrations, tests, workflows, lockfiles, screenshots, and documentation; inspect the staged diff and secret scan; commit/push with explicit approval; then verify all required GitHub checks. Protect `main`, require reviewed pull requests and the backend, frontend, security, image-build, and browser checks. Configure the `paid-evaluation` environment with required reviewers before any optional paid run.
 
-Known limitation: local workflow validation cannot reproduce GitHub event payloads, service orchestration, cache behavior, branch rules, or GitHub-hosted image/runtime differences. These are the remaining Phase 17 acceptance blockers.
+Hosted evidence now exists for public `3124016`; local tests alone remain insufficient. Unresolved acceptance items are the failing container check, the specification/public required-check discrepancy, original private-repository protection and repository-scope decisions, and protected-environment setup before optional paid execution. See the reconciliation; no acceptance criterion is relaxed.
 
 ## Local validation evidence — 27 October 2026
 

@@ -1,20 +1,32 @@
 # Phases 17–19 handoff
 
-This handoff applies to the existing private repository
-`ujoy100/telecom-agentic-ai-support`, branch `main`. The historical baseline
-was `7358213`; current implementation and evidence are in the master tracker. Do not
-initialize another repository, change the remote, rewrite history, or stage
-without reviewing `git status`, `git diff`, and ignored files.
+The original handoff below governs the private development repository
+`ujoy100/telecom-agentic-ai-support`. This copy is maintained in the independent
+public `ujoy100/signaldesk-portfolio` repository. Public validation/protection do
+not automatically close private-repository acceptance. The historical private
+baseline was `7358213`; public PR #10 merged as `3124016`. See
+[the dated Phase 17 reconciliation](phase-17-reconciliation.md) and the master
+tracker for current public evidence and unresolved requirements.
+
+Do not initialize another repository, change remotes or rewrite history. Preserve
+existing uncommitted owner changes and exclude all local secrets/configuration.
+The owner’s local Compose port changes (8001/5174) remain outside this
+public documentation-only PR.
 
 ## Phase 17 — GitHub Actions
 
-Keep Phase 17 IN PROGRESS. The owner should review and stage only source, migrations,
-tests and documentation. Exclude `.env`, `frontend/.env`, `secrets/*.txt`, API
-keys, local databases, `.venv`, caches, `node_modules` and build output. Before a
-future commit: run all quality gates, `git diff --cached --check`, inspect
-`git diff --cached`, scan staged content for credentials, then commit and push to
-the existing `main` within explicit owner authorization. The current task authorizes a reviewed
-normal commit/push after passing gates, but not publication or settings changes.
+Keep Phase 17 IN PROGRESS. Any future implementation must use a reviewed PR in
+the explicitly authorized repository; no historical commit/push instruction in
+this handoff grants new authorization. This reconciliation permits only public
+documentation on a separate branch/draft PR. It does not authorize application,
+workflow, image, dependency, setting, deployment or private-repository changes.
+
+Public application/browser/evaluation/secret checks pass on `3124016`; backend
+Trivy remains 45 HIGH / 9 CVEs, zero CRITICAL. Public protection requires four
+checks but not the enabled image-security job. Private protection is blocked by
+the plan-related HTTP 403. The public `paid-evaluation` environment is not
+configured. These are separate evidence/acceptance items, not a green release.
+Production deployment remains blocked.
 
 Required workflows: backend Ruff/pytest with disposable PostgreSQL and Qdrant
 services; frontend npm ci/lint/test/build; deterministic evaluation gates; Alembic
