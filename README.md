@@ -142,7 +142,11 @@ routine work. Do not reuse development databases for tests.
 Integration tests require the isolated PostgreSQL database `telecom_test_db`,
 with schema already migrated to head. The fixture rejects other database names.
 
+The full suite includes an isolated optional RAGAS import-compatibility check;
+install that extra for the suite, while keeping it out of application startup:
+
 ```bash
+uv sync --frozen --extra evaluation
 TEST_DATABASE_URL=postgresql+psycopg:///telecom_test_db uv run pytest backend/tests -q
 uv run ruff check backend
 uv run ruff format --check backend
@@ -193,8 +197,10 @@ behavior, not cloud deployment or verified Microsoft sign-in.
 - Prompt-injection controls are defense in depth, not proof of immunity.
 - Lightweight readiness, local service assumptions, and the recorded Qdrant
   client/server compatibility warning require production review.
-- The strict container gate currently fails on 46 HIGH backend Debian package/
-  advisory rows (10 CVEs); the patched frontend has zero HIGH/CRITICAL findings.
+- The recorded baseline container gate failed on 46 HIGH backend Debian package/
+  advisory rows (10 CVEs); the patched frontend had zero HIGH/CRITICAL findings.
+  The newer PR scan still fails with 45 HIGH rows / 9 CVEs; see
+  [exact demo/CI evidence](docs/demo-evidence.md).
   These unresolved OS advisories block production container release. A separate
   source-review portfolio route is proposed in the [publication plan](docs/portfolio-publication-plan.md);
   it does not clear these findings. See [SECURITY.md](SECURITY.md).

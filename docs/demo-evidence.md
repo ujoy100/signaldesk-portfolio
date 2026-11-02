@@ -61,3 +61,34 @@ supported verified fix was established; DHI migration is not included.
 Project and image names are public-portfolio scoped to avoid reusing the private
 project’s containers or volumes. This PR does not migrate/delete pre-existing
 volumes, change GitHub protections or deploy. Phase 17 IN PROGRESS; 18–19 PENDING.
+
+## Hosted evidence for source commit `53a21b7`
+
+[CI run](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41410657422)
+and [browser run](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41410657421)
+ran the PR merge simulation `7f9e127e005c2fb8036169c24acd7e68d2789041`.
+
+| Check | Observed result |
+|---|---|
+| Backend regression | 131 passed, 1 intentional paid-test skip; one known optional RAGAS import warning |
+| Frontend | Lint/build and 7 tests passed |
+| Chrome Playwright | 5 passed in 15.1 seconds |
+| Migration/checkpoint startup | Completed; API/migrate/checkpoint containers share the same image ID |
+| Live HTTP acceptance | Invalid/expired tokens 401; unauthorized approval 403; edit reauthorization true; feedback visible; 1 promoted Qdrant point; exactly-once event delta 1 |
+| Secret/dependency checks | Passed |
+| Strict Trivy image gate | Failed: backend 45 HIGH rows / 9 CVEs, 0 CRITICAL; frontend 0 HIGH/CRITICAL |
+
+The historical 46 HIGH / 10-CVE baseline in SECURITY.md and the existing findings
+report is preserved. This newer scan omits CVE-2026-119586 while reporting the
+same SQLite package version; no application/runtime fix or remediation of that
+CVE is inferred. Remaining IDs: CVE-2025-69720, CVE-2026-119373,
+CVE-2026-16742, CVE-2026-54369, CVE-2026-76642, CVE-2026-78408,
+CVE-2026-78409, CVE-2026-78410 and CVE-2026-9538. Their Fixed Version cells
+are empty in this run. No further speculative runtime change was attempted.
+
+The six checked-in screenshots were refreshed from that browser run’s allowlisted
+artifact after visual privacy review: empty token input at login, fictional
+Development User roles, fictional ticket/knowledge data, no real identities or
+credentials. PNGs contain no text/EXIF metadata. The source SHA above is their
+capture provenance; later documentation/asset commits do not retroactively make
+these captures evidence from another SHA. New runs produce separate artifacts.

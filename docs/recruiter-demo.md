@@ -1,9 +1,10 @@
 # SignalDesk: four-minute working demonstration
 
 This is a local fictional-data demonstration, not a production deployment.
-The backend’s documented **46 HIGH OS-package findings across 10 CVEs** remain
-unresolved. The unchanged strict container scan must continue to fail until a
-supported, verified fix exists. Phase 17 is IN PROGRESS; Phases 18–19 are PENDING.
+The backend’s historical **46 HIGH OS-package findings across 10 CVEs** remain
+documented. The newer PR scan reports 45 HIGH rows / 9 CVEs; see
+[exact evidence](demo-evidence.md). Production release stays blocked while the
+unchanged strict gate fails; no supported verified runtime fix is claimed. Phase 17 is IN PROGRESS; Phases 18–19 are PENDING.
 
 ## Fresh local setup
 
@@ -125,8 +126,8 @@ login, support, approval, knowledge, feedback and mobile under `docs/screenshots
 The isolated browser stack disables provider credentials and uses synthetic data.
 The artifact contains no traces, HAR, video, environment files or logs; retention
 is seven days. Review the artifact before promoting screenshots into the README.
-Existing checked-in screenshots are earlier acceptance captures, not automatically
-replaced by a new workflow run. See [demo evidence](demo-evidence.md).
+Checked-in screenshots are reviewed captures with their source SHA recorded in
+the evidence document; they are not automatically replaced by a new workflow run. See [demo evidence](demo-evidence.md).
 
 Docker-free source checks (after `uv sync --frozen` / frontend `npm ci`):
 
