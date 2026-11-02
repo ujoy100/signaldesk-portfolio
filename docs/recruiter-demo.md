@@ -17,7 +17,7 @@ python3 -m backend.scripts.prepare_local_demo
 docker compose config --quiet
 docker compose build backend frontend
 docker compose up -d --no-build --pull never --wait
-docker compose --profile tools run --rm --no-build seed
+docker compose --profile tools run --rm --pull never seed
 docker compose ps --all
 ```
 
