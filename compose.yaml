@@ -1,4 +1,13 @@
-name: telecom-agentic-ai-support
+name: signaldesk-portfolio
+
+# Every backend service uses the same locally built runtime image.
+# The project prefix also isolates parallel acceptance/development stacks.
+x-backend: &backend
+  image: ${COMPOSE_PROJECT_NAME:-signaldesk-portfolio}-backend:local
+  build:
+    context: .
+    dockerfile: backend/Dockerfile
+    target: runtime
 
 services:
   postgres:
@@ -27,10 +36,7 @@ services:
     restart: unless-stopped
 
   migrate:
-    build:
-      context: .
-      dockerfile: backend/Dockerfile
-      target: runtime
+    <<: *backend
     command: ["alembic", "upgrade", "head"]
     environment: &backend_environment
       APP_ENV: development
@@ -51,7 +57,7 @@ services:
     restart: "no"
 
   checkpoints:
-    build: { context: ., dockerfile: backend/Dockerfile, target: runtime }
+    <<: *backend
     command: ["python", "-m", "backend.scripts.setup_checkpoints"]
     environment: *backend_environment
     secrets: [auth_jwt_secret, postgres_password]
@@ -60,7 +66,7 @@ services:
     restart: "no"
 
   backend:
-    build: { context: ., dockerfile: backend/Dockerfile, target: runtime }
+    <<: *backend
     environment: *backend_environment
     secrets: [auth_jwt_secret, postgres_password]
     ports: ["127.0.0.1:8000:8000"]
@@ -90,7 +96,7 @@ services:
 
   seed:
     profiles: ["tools"]
-    build: { context: ., dockerfile: backend/Dockerfile, target: runtime }
+    <<: *backend
     command: ["/bin/sh", "-c", "python -m backend.app.db.seed && python -m backend.app.knowledge.ingestion"]
     environment: *backend_environment
     secrets: [auth_jwt_secret, postgres_password]

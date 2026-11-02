@@ -39,8 +39,23 @@ jobs:
           chmod 600 secrets/*.txt
       - name: Start isolated stack
         run: docker compose up -d --build --wait
+      - name: Verify every backend service uses the same runtime image
+        run: |
+          python3 - <<'PYTHON'
+          import json
+          import subprocess
+          services = ["backend", "migrate", "checkpoints"]
+          ids = []
+          for service in services:
+              container = subprocess.check_output(["docker", "compose", "ps", "-a", "-q", service], text=True).strip()
+              ids.append(json.loads(subprocess.check_output(["docker", "inspect", container], text=True))[0]["Image"])
+          assert len(set(ids)) == 1, "Backend startup services use different runtime images"
+          print("API, migrations and checkpoints use the same runtime image")
+          PYTHON
       - name: Seed fictional acceptance data
         run: docker compose --profile tools run --rm seed
+      - name: Verify live HTTP authorization, approvals, publication and exactly-once execution
+        run: docker compose exec -T backend python -m backend.scripts.verify_compose_acceptance
       - name: Install locked frontend dependencies
         working-directory: frontend
         run: npm ci
@@ -52,6 +67,20 @@ jobs:
           PLAYWRIGHT_BASE_URL: http://localhost:5173
           PLAYWRIGHT_BROWSER_CHANNEL: chrome
         run: npm run test:e2e
+      - name: Retain only fictional demo screenshots
+        if: success()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fictional-demo-screenshots-${{ github.sha }}
+          retention-days: 7
+          if-no-files-found: error
+          path: |
+            docs/screenshots/signaldesk-login.png
+            docs/screenshots/phase15-support.png
+            docs/screenshots/phase15-approval.png
+            docs/screenshots/phase15-knowledge.png
+            docs/screenshots/phase15-feedback.png
+            docs/screenshots/phase15-mobile.png
       - name: Record service state
         if: always()
         run: docker compose ps
