@@ -86,23 +86,40 @@ than independent autonomous agents with unrestricted write tools.
   backend/frontend/migration/security/image/browser gates. Paid evaluation is
   manual opt-in. CI/CD currently supplies CI, with no cloud deployment automation.
 
+## Working four-minute demo
+
+Follow the [demo runbook](docs/recruiter-demo.md) for safe setup, an exact
+walkthrough and evidence boundaries. Positive browser workflows use the live
+Compose API, PostgreSQL and Qdrant. Successful hosted browser runs retain only
+six fictional-data screenshots for seven days; no tokens, traces or videos are
+uploaded. Deep Agents/OpenAI and Entra are optional opt-ins for the demo, with
+separate credential and acceptance requirements.
+
 ## Local setup
 
 Use Python 3.13, uv, Node.js 22 with npm, Docker Compose and Git. From this root:
 
 ```bash
-uv sync --frozen --extra evaluation
+python3 -m backend.scripts.prepare_local_demo
+# Optional host development/testing tools (not needed for the Compose UI demo):
+uv sync --frozen
 npm --prefix frontend ci
-cp .env.example .env
-cp frontend/.env.example frontend/.env
 ```
 
-Configure ignored secrets following [secrets/README.md](secrets/README.md).
+The preparation command creates only missing configuration/secret files with
+private permissions and preserves existing values. If an existing database volume
+has lost its matching password file, restore that file before preparation; never
+reset the volume to resolve a password mismatch. See [secrets/README.md](secrets/README.md).
+The public Compose project is `signaldesk-portfolio`, isolated from the original
+private development project. Both use localhost ports 5173/8000 by default; run
+one UI/API pair at a time.
 Never put credentials in `VITE_` variables; those become browser-visible.
 
 ```bash
 docker compose config --quiet
-docker compose up -d --build --wait
+# One runtime image serves API, migrations, checkpoints and seed tooling.
+docker compose build backend frontend
+docker compose up -d --no-build --pull never --wait
 docker compose --profile tools run --rm seed
 ```
 

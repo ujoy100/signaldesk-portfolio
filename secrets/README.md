@@ -4,14 +4,15 @@ Create `postgres_password.txt` and `auth_jwt_secret.txt` in this ignored directo
 Use development-only values. Never commit either file. Compose mounts them at runtime;
 they are not copied into an image.
 
-Generate new development values without echoing them to the terminal, then restrict
-permissions:
+For a fresh public portfolio checkout, run this from the repository root:
 
 ```bash
-openssl rand -base64 32 > secrets/postgres_password.txt
-openssl rand -base64 48 > secrets/auth_jwt_secret.txt
-chmod 600 secrets/postgres_password.txt secrets/auth_jwt_secret.txt
+python3 -m backend.scripts.prepare_local_demo
 ```
+
+It creates only missing files, uses mode 0600, preserves existing credentials and
+never prints their values. If you already have a database volume but lost its
+password file, restore the original file first; do not generate a replacement.
 
 Presence and ignore checks that do not reveal values:
 
