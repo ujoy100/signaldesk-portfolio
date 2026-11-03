@@ -26,3 +26,22 @@ private development repository and permits owner-approved public source review
 while keeping production release blocked. The owner confirms personal project
 ownership and OpenAI Codex assistance. No open-source license is added. Synthetic
 commit attribution is retained to avoid exposing personal email metadata.
+
+## Post-export portfolio changes — 3 November 2026
+
+`EXPORT_MANIFEST.json` preserves the original exported-file integrity
+inventory. Its hashes describe the initial export snapshot and are not
+automatically refreshed after subsequent portfolio-only commits.
+
+The public portfolio has since received approved container security
+remediation, CI validation and documentation updates. Consequently,
+current repository files may differ from the historical export hashes,
+and newly added documentation may not appear in the original inventory.
+
+For current source integrity, use Git commit identities and review
+the corresponding changes. The historical manifest is not proof of
+current-file integrity, vulnerability absence or production approval.
+
+The original private project remains separate. Phase 17 is
+IN PROGRESS, Phases 18–19 are PENDING, and production deployment
+remains not approved.

@@ -1,5 +1,13 @@
 # Demonstration evidence and limits — 2 November 2026
 
+> **Evidence update — 3 November 2026:** The earlier Debian
+> vulnerability findings are historical. The public Alpine backend
+> and patched frontend subsequently passed the strict Trivy gate
+> and post-merge CI.
+>
+> See the November 3 validation section below.
+
+
 SignalDesk is a personal learning/portfolio project developed with Codex
 assistance. Data and identities used for demonstration are fictional. No customer
 or employer deployment, production clearance or fabricated benchmark is claimed.
@@ -92,3 +100,44 @@ Development User roles, fictional ticket/knowledge data, no real identities or
 credentials. PNGs contain no text/EXIF metadata. The source SHA above is their
 capture provenance; later documentation/asset commits do not retroactively make
 these captures evidence from another SHA. New runs produce separate artifacts.
+
+## Public Alpine remediation and post-merge validation — 3 November 2026
+
+This section supersedes earlier statements about the **current public
+portfolio container security status**, while preserving their original
+historical evidence.
+
+The public backend migrated from Python 3.13 Debian Trixie to
+Python 3.13 Alpine. The frontend received a patched Alpine `libexpat`
+dependency. The strict Trivy HIGH/CRITICAL gate was retained without
+vulnerability suppressions or an ignore-unfixed exception.
+
+### Verification results
+
+| Check | Result |
+|---|---|
+| Backend Alpine runtime | Built and validated |
+| Backend regression tests | 131 passed, 1 skipped in earlier Alpine testing |
+| FastAPI health | HTTP 200 |
+| Backend runtime Trivy gate | PASS |
+| Frontend runtime Trivy gate | PASS |
+| GitHub Actions CI after merge | SUCCESS |
+| Playwright browser acceptance after merge | SUCCESS |
+
+Public merge commit:
+`f952f55caf4a1f4090134c0fd016ce5d4e978110`
+
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Post-merge browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+### Evidence boundaries
+
+These results establish automated validation for the public portfolio
+at the stated commit. They do not constitute production security
+certification or confirm cloud deployment.
+
+The original private `telecom-agentic-ai-support` project is separate;
+its unresolved findings and acceptance requirements are unaffected.
+
+Phase 17 remains **IN PROGRESS**. Cloud deployment (Phase 18) and final
+release acceptance (Phase 19) remain **PENDING**.

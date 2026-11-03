@@ -1,5 +1,36 @@
 # Recruiter publication plan — 1 November 2026
 
+## Publication outcome — 3 November 2026
+
+The independent SignalDesk source-review portfolio has been published:
+
+https://github.com/ujoy100/signaldesk-portfolio
+
+The original private `telecom-agentic-ai-support` repository remains
+separate and has not been made public.
+
+Public PR #11 merged the Alpine backend and frontend security fixes
+into `main` as commit `f952f55caf4a1f4090134c0fd016ce5d4e978110`.
+
+The strict Trivy HIGH/CRITICAL gate passed without vulnerability
+suppressions. Post-merge CI and browser acceptance passed.
+
+Evidence:
+
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+The recommendations, uncreated-repository statements and failing
+Debian-image evidence below reflect the historical November 1
+planning state. Do not repeat the repository creation or migration.
+
+The portfolio is available for recruiter source review.
+This is not a production-approved or cloud-deployed application.
+
+Phase 17 remains IN PROGRESS. Phases 18–19 remain PENDING.
+
+---
+
 ## Recommendation and comparison
 
 Recommend **B: a separate clean source-review portfolio**, proposed name

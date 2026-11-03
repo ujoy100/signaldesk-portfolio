@@ -4,6 +4,64 @@
 This document records evidence and unresolved acceptance requirements; it does
 not change the frozen architecture, completion criteria or security policy.
 
+## Reconciliation update — 3 November 2026
+
+**Public portfolio container remediation: VALIDATED.**
+**Phase 17: IN PROGRESS. Phases 18–19: PENDING.**
+**Production deployment: NOT APPROVED.**
+
+This update supersedes the November 2 statements about the current
+public backend vulnerability gate. Earlier Debian findings and failed
+workflow results remain preserved as historical evidence.
+
+### Remediation and validation
+
+The public backend migrated from Python 3.13 Debian Trixie to
+Python 3.13 Alpine. The frontend Alpine runtime was updated to
+require a patched `libexpat` package.
+
+The strict Trivy HIGH/CRITICAL gate remained unchanged. No
+vulnerability suppression or ignorxed exception was introduced.
+
+| Check | Verified result |
+|---|---|
+| Backend Alpine runtime | Built and validated |
+| Backend regression | 131 passed, 1 skipped in earlier Alpine testing |
+| Backend health endpoint | HTTP 200 |
+| Backend and frontend Trivy | Strict gate passed |
+| Post-merge GitHub Actions CI | SUCCESS |
+| Post-merge browser acceptance | SUCCESS |
+
+Public PR #11 merged into `main` as
+`f952f55caf4a1f4090134c0fd016ce5d4e978110`.
+
+Evidence:
+
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Post-merge browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+### Remaining acceptance boundaries
+
+The public portfolio's validated container images are no longer
+blocked by the historical Debian Trivy findings at that commit.
+
+This does not change the separate original private repository.
+Private branch-protection acceptance remains blocked by the
+previously observed GitHub plan-related HTTP 403.
+
+The public `paid-evaluation` environment still requires
+configuration and protection before optional paid evaluation.
+
+Public branch protection and required-check configuration must
+remain accurately described. Passing the image-security job does
+not itself establish that GitHub branch protection requires it.
+
+The frozen architecture and technology choices remain unchanged.
+Cloud deployment, live identity-provider validation and final
+production acceptance have not been completed.
+
+---
+
 ## Authority and repository scope
 
 The repository Phase 17 specification, Phase 17–19 handoff and master phase

@@ -1,9 +1,13 @@
 # SignalDesk
 
-> **Source-review portfolio snapshot.** Not cleared for production deployment.
-> Backend container findings remain unresolved and strict CI gates are retained.
+> **AI Engineering Portfolio — Public validation passed.**
+> The Alpine backend and patched frontend passed the strict Trivy security gate.
+> Post-merge CI and browser acceptance passed on November 3, 2026.
+> This is a portfolio demonstration, not a production-approved deployment.
 > See [snapshot provenance](SNAPSHOT.md) and the
 > [publication plan](docs/portfolio-publication-plan.md).
+>
+> [CI evidence](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313) | [Browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
 
 A telecom support operations workspace demonstrating controlled agent workflows,
 grounded retrieval, and human approval before business changes. Built as an AI
@@ -197,13 +201,15 @@ behavior, not cloud deployment or verified Microsoft sign-in.
 - Prompt-injection controls are defense in depth, not proof of immunity.
 - Lightweight readiness, local service assumptions, and the recorded Qdrant
   client/server compatibility warning require production review.
-- The recorded baseline container gate failed on 46 HIGH backend Debian package/
-  advisory rows (10 CVEs); the patched frontend had zero HIGH/CRITICAL findings.
-  The newer PR scan still fails with 45 HIGH rows / 9 CVEs; see
-  [exact demo/CI evidence](docs/demo-evidence.md).
-  These unresolved OS advisories block production container release. A separate
-  source-review portfolio route is proposed in the [publication plan](docs/portfolio-publication-plan.md);
-  it does not clear these findings. See [SECURITY.md](SECURITY.md).
+- **Container security remediation:** Earlier Debian-based backend images
+  reported 46 HIGH advisory rows (10 CVEs), followed by 45 HIGH rows (9 CVEs).
+  These are historical findings, not the latest public portfolio image results.
+  The backend migrated to Alpine Python 3.13, and the frontend received a
+  patched `libexpat` dependency. The strict, unchanged Trivy HIGH/CRITICAL
+  security gate passed in public CI on November 3, 2026.
+  See [CI evidence](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313),
+  [demo/CI history](docs/demo-evidence.md), and [SECURITY.md](SECURITY.md).
+  Passing automated security gates does not constitute production certification.
 - Optional frozen RAGAS dependencies have documented advisories and a deprecated
   LangChain community import. They remain isolated from production.
 - `main` is protected: pull requests are required, force pushes and deletion are
