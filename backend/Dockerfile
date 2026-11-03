@@ -6,7 +6,7 @@ RUN apk upgrade --no-cache \
 COPY pyproject.toml uv.lock ./
 
 FROM base AS evaluation
-RUN apk add --no-cache git \
+RUN apk add --no-cache git build-base linux-headers \
     && uv sync --frozen --no-dev --extra evaluation --no-install-project
 COPY backend ./backend
 COPY alembic.ini ./alembic.ini
