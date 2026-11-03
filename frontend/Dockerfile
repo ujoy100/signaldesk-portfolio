@@ -10,7 +10,8 @@ ENV VITE_ENABLE_DEV_LOGIN=$VITE_ENABLE_DEV_LOGIN
 RUN npm run build
 
 FROM nginx:1.30.6-alpine@sha256:0e52bd054126cdc040b1276c0af347aeb02a41b9cfe305d6094767ac30e97949
-RUN apk upgrade --no-cache
+RUN apk upgrade --no-cache \
+    && apk add --no-cache 'libexpat>=2.10.0-r0'
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /app/dist /usr/share/nginx/html
 EXPOSE 80
