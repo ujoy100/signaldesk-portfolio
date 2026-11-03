@@ -1,16 +1,12 @@
-FROM python:3.13-slim-trixie AS base
+FROM python:3.13-alpine AS base
 ENV PATH="/app/.venv/bin:$PATH" PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /app
-RUN apt-get update \
-    && apt-get upgrade --yes \
-    && rm -rf /var/lib/apt/lists/* \
+RUN apk upgrade --no-cache \
     && pip install --no-cache-dir uv==0.13.6
 COPY pyproject.toml uv.lock ./
 
 FROM base AS evaluation
-RUN apt-get update \
-    && apt-get install --yes --no-install-recommends git \
-    && rm -rf /var/lib/apt/lists/* \
+RUN apk add --no-cache git build-base linux-headers \
     && uv sync --frozen --no-dev --extra evaluation --no-install-project
 COPY backend ./backend
 COPY alembic.ini ./alembic.ini

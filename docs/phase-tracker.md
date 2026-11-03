@@ -25,6 +25,33 @@
 | 18 | Cloud deployment and production configuration | PENDING |
 | 19 | Final docs, diagrams, screenshots, release notes | PENDING |
 
+## Public Phase 17 reconciliation — 2026-11-02
+
+**Phase 17 IN PROGRESS; Phases 18–19 PENDING. Production deployment BLOCKED.**
+The phase table above is unchanged. Older entries below retain their historical
+private-development scope and results; they are not statements of current public
+repository configuration.
+
+Public PR #10 merged as `3124016`. Its merged-main CI records backend **131 passed,
+1 intentional skip**, frontend **7 passed**, deterministic evaluation **40 cases
+passed**, and passing secret/dependency checks. Real Chrome acceptance: **5 passed**.
+Backend Trivy still fails: **45 HIGH rows / 9 CVEs, zero CRITICAL**; frontend has
+zero HIGH/CRITICAL findings. The earlier **46 HIGH / 10-CVE** report is preserved
+as dated baseline evidence, not overwritten or represented as the latest scan.
+
+Public `main` requires four checks; its image-security job stays enabled/visible
+but is not required. The specification’s image-check acceptance discrepancy is
+unresolved. Private branch protection remains blocked by the last verified
+plan-related HTTP 403; public protection is not a substitute. The public
+`paid-evaluation` environment is not configured and must be protected before any
+optional paid run. A working local fictional-data Docker demo does not establish
+production readiness or complete private-repository acceptance.
+
+See [the reconciliation](phases/phase-17-reconciliation.md) for exact run links,
+required-check names, confirmed evidence, unresolved requirements and the distinct
+Phase 18/19 prerequisites. No frozen requirement, workflow, setting or phase
+status is changed by this documentation update.
+
 ## Retained security blockers — 2026-11-01
 
 Hosted commit `558ddfb` passed backend/migrations/evaluation, frontend quality,
