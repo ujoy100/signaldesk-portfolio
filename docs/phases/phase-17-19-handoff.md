@@ -13,6 +13,44 @@ existing uncommitted owner changes and exclude all local secrets/configuration.
 The owner’s local Compose port changes (8001/5174) remain outside this
 public documentation-only PR.
 
+## Public portfolio update — 3 November 2026
+
+**Public CI and container security: VALIDATED at the recorded commit.**
+**Phase 17: IN PROGRESS. Phases 18–19: PENDING.**
+**Production deployment: NOT APPROVED.**
+
+Public PR #11 merged into `main` as
+`f952f55caf4a1f4090134c0fd016ce5d4e978110`.
+
+The public FastAPI runtime migrated from Python 3.13 Debian Trixie
+to Python 3.13 Alpine. The frontend Alpine runtime received a patched
+`libexpat` package.
+
+The unchanged strict Trivy HIGH/CRITICAL image gate passed.
+Post-merge CI and real Compose browser acceptance also passed.
+
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Post-merge browstance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+The November 2 references below to 45 HIGH Debian findings are
+historical. They are not the current public Alpine image result.
+
+Public branch protection currently requires four checks. Passing
+the image-security job does not establish that branch protection
+requires that fifth check.
+
+The original private project remains separate. Its branch-protection
+acceptance and other outstanding requirements are not satisfied by
+the public portfolio validation.
+
+The public paid-evaluation environment still requires setup and
+appropriate protection before optional paid evaluations.
+
+This update does not authorize cloud deployment or changes to the
+original private repository.
+
+---
+
 ## Phase 17 — GitHub Actions
 
 Keep Phase 17 IN PROGRESS. Any future implementation must use a reviewed PR in

@@ -1,5 +1,34 @@
 # Final documentation and secret-scan preflight — 1 November 2026
 
+## Current public portfolio status — 3 November 2026
+
+This document preserves the historical November 1 pre-publication
+investigation. Statements below about an absent remote, failing Debian
+images or blocked public source publication are historical.
+
+The independent SignalDesk portfolio is now public. PR #11 merged
+the Alpine backend and patched frontend security remediation into
+public `main`.
+
+The unchanged strict Trivy HIGH/CRITICAL gate passed. Post-merge
+GitHub Actions CI and Playwright browser acceptance passed.
+
+Evidence:
+
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Post-merge browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+The original November 1 Gitleaks checksum false positives remain
+historical findings. Later public CI secret/dependency checks passed,
+but this is not proof that every potential secret is absent.
+
+Phase 17 remains IN PROGRESS. Phases 18–19 remain PENDING.
+Production deployment is not approved.
+
+---
+
+
+
 **Decision: BLOCKED for publication under unchanged strict scanner gates.**
 No actual credential exposure was identified. Owner approval of publication is
 still required; no remote exists and nothing is pushed.

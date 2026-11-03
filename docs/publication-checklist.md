@@ -5,6 +5,38 @@ Its historical-email, retained-artifact and branch-plan items refer to that
 repository. The independent portfolio contains neither its history nor its Actions
 artifacts. This checklist does not authorize publication or settings changes.
 
+## Public portfolio validation — 3 November 2026
+
+The following checks apply only to the independent public
+`ujoy100/signaldesk-portfolio` repository.
+
+- [x] Public PR #11 merged into `main` as
+  `f952f55caf4a1f4090134c0fd016ce5d4e978110`.
+- [x] Backend migrated from Debian Trixie to Python 3.13 Alpine.
+- [x] Frontend Alpine runtime updated to require patched `libexpat`.
+- [x] Strict Trivy HIGH/CRITICAL gate passed for the validated public
+  backend and frontend images without vulnerability suppressions.
+- [x] Post-merge GitHub Actions CI passed.
+- [x] Post-merge Playwright browser acceptance passed.
+- [ ] Confirm the final recruiter-readiness documentation commit passes
+  its own required GitHub checks.
+- [ ] Complete final documentation consistency, provenance and
+  public secret-scan review.
+
+Evidence:
+
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Post-merge browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+These results do not establish cloud deployment or formal production
+security approval. The original private repository's full-release
+requirements below remain separate and unchanged.
+
+**Phase 17 IN PROGRESS; Phases 18–19 PENDING.**
+**Production deployment NOT APPROVED.**
+
+---
+
 ## Independent source-review portfolio
 
 - [x] Owner confirms personal learning/portfolio ownership and Codex assistance;

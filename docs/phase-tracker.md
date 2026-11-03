@@ -25,6 +25,51 @@
 | 18 | Cloud deployment and production configuration | PENDING |
 | 19 | Final docs, diagrams, screenshots, release notes | PENDING |
 
+## Public portfolio security remediation — 2026-11-03
+
+**Phase 17 IN PROGRESS; Phases 18–19 PENDING. Production deployment
+not approved.**
+
+The public SignalDesk portfolio migrated its FastAPI runtime from
+Python 3.13 Debian Trixie to Python 3.13 Alpine. The frontend Nginx
+Alpine runtime received a patched `libexpat` dependency.
+
+The existing strict Trivy HIGH/CRITICAL gate was retained without
+suppression or ignore-unfixed exceptions.
+
+### Verified public results
+
+| Validation | Result |
+|---|---|
+| Backend Alpine runtime | Built successfully |
+| Backend regression | 131 passed, 1 skipped in earlier Alpine testing |
+| FastAPI health |  |
+| Backend and frontend image security | Strict Trivy gate passed |
+| Post-merge GitHub Actions CI | SUCCESS |
+| Post-merge Playwright acceptance | SUCCESS |
+
+PR #11 was merged into public `main` as
+`f952f55caf4a1f4090134c0fd016ce5d4e978110`.
+
+Evidence:
+
+- [CI run](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+The older Debian findings of 46 HIGH rows / 10 CVEs and
+45 HIGH rows / 9 CVEs remain historical evidence, not the current
+public Alpine image scan result.
+
+This public portfolio validation does not resolve the separate
+private `telecom-agentic-ai-support` repository's acceptance blockers.
+Private branch-protection requirements and paid-environment validation
+remain outstanding.
+
+Phase 17 remains IN PROGRESS under the frozen completion criteria.
+Phase 18 cloud deployment and Phase 19 final release remain PENDING.
+
+---
+
 ## Public Phase 17 reconciliation — 2026-11-02
 
 **Phase 17 IN PROGRESS; Phases 18–19 PENDING. Production deployment BLOCKED.**

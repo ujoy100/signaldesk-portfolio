@@ -1,10 +1,16 @@
 # SignalDesk: four-minute working demonstration
 
 This is a local fictional-data demonstration, not a production deployment.
-The backend’s historical **46 HIGH OS-package findings across 10 CVEs** remain
-documented. The newer PR scan reports 45 HIGH rows / 9 CVEs; see
-[exact evidence](demo-evidence.md). Production release stays blocked while the
-unchanged strict gate fails; no supported verified runtime fix is claimed. Phase 17 is IN PROGRESS; Phases 18–19 are PENDING.
+Earlier Debian backend images reported **46 HIGH findings / 10 CVEs** and
+later **45 HIGH findings / 9 CVEs**. These findings remain documented as
+historical evidence in [demo evidence](demo-evidence.md).
+
+On November 3, 2026, the public Alpine backend and patched frontend passed
+the unchanged strict Trivy HIGH/CRITICAL gate. Post-merge CI and browser
+acceptance also passed on public `main`.
+
+This remains a fictional-data portfolio demonstration, not a production-
+approved deployment. Phase 17 is IN PROGRESS; Phases 18–19 are PENDING.
 
 ## Fresh local setup
 
@@ -79,7 +85,7 @@ them against customer data. Use a freshly prepared public demo stack when possib
 | 1:40–2:15 | Enter the fictional ticket ID, select “Propose a controlled ticket action”, then submit “Apply the cited SIM activation guidance and resolve this fictional ticket” | The workflow pauses for human approval rather than immediately writing to PostgreSQL. Support Agents cannot approve the action. |
 | 2:15–3:15 | Pause recording for role switching. Sign in as fictional Supervisor, open Approvals, edit the proposed priority/status and submit for reauthorization. Approve the new replacement record | A material edit invalidates the old approval. The authorized resume executes through the Gateway. Show the final Executed status. |
 | 3:15–3:45 | Switch to fictional Admin off-camera; show Knowledge lifecycle and Feedback history | Role-aware operational views reflect real API/database records. This segment demonstrates listing, not a new knowledge promotion. |
-| 3:45–4:00 | Return to README security/limitations | Local application functionality is demonstrated; cloud deployment and container clearance remain blocked. |
+| 3:45–4:00 | Return to README security/limitations | Local functionality and public container CI validation are demonstrated; cloud deployment and production approval remain pending. |
 
 These are real application operations. Do not replace responses with browser
 routes/mocks, edit DOM content or add invented model output for the recording.

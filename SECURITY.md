@@ -36,7 +36,48 @@ historical evidence; the source-review route below governs this portfolio.
 Development integration/browser tests must use only isolated `telecom_test_db`;
 `compose.acceptance.yaml` supplies the browser-specific database override.
 
-## Runtime OS release blocker — 1 November 2026
+## Public portfolio container remediation — 3 November 2026
+
+The public SignalDesk portfolio migrated its FastAPI runtime from
+Python 3.13 Debian Trixie to Python 3.13 Alpine.
+
+The frontend Nginx Alpine runtime was also updated to require a
+patched `libexpat` package.
+
+The existing strict Trivy HIGH/CRITICAL vulnerability gate was retained,
+without introducing vulnerability suppressions or an ignore-unfixed
+exception.
+
+**Verified public portfolio results:**
+
+- Backend runtime: strict Trivy gate passed.
+- Frontend runtime: strict Trivy gate passed.
+- Post-merge GitHub Actions CI: successful.
+- Post-merge Playwright browser acceptance: successful.
+- Merge commit: `f952f55caf4a1f4090134c0fd016ce5d4e978110`.
+
+Evidence:
+- [Post-merge CI](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839313)
+- [Post-merge browser acceptance](https://github.com/ujoy100/signaldesk-portfolio/actions/runs/41622839342)
+
+These results apply to the validated public portfolio images and
+commit. They do not guarantee that future images will remain free
+of newly disclosed vulnerabilities.
+
+Production deployment, live identity-provider validation, cloud
+configuration and final release acceptance are not complete.
+Phase 17 remains IN PROGRESS; Phases 18 and 19 remain PENDING.
+
+The original private `telecom-agentic-ai-support` repository is
+a separate project. Its container findings and private acceptance
+requirements have not been cleared by these public portfolio results.
+
+## Historical Debian runtime findings — 1 November 2026
+
+The following section records the original Debian-based security
+investigation. Iis retained for auditability and technical learning.
+Its failed-gate statements are historical, not the current public
+Alpine runtime status.
 
 The fully updated Python 3.13 Debian Trixie runtime still reports 46 HIGH package/
 advisory rows covering ten CVEs in Trivy 0.76.1, with no CRITICAL or Python-package
@@ -63,3 +104,13 @@ source inspection, not production clearance; all vulnerability gates stay strict
 Rebuild without cached OS-update layers after patched
 packages become available, or implement and fully validate a reviewed compatible
 runtime reduction. Do not hide package metadata or suppress findings to pass CI.
+
+### Current interpretation
+
+The Debian findings explain why the runtime migration was needed.
+The historical instruction not to release failing Debian images
+remains valid for those images.
+
+The public Alpine runtime subsequently passed the unchanged strict
+gate. Passing automated checks is not equivalent to formal production
+security approval.
